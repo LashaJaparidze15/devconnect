@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { getAvatarUrl, getProjectImageUrl } from '../utils/helpers';
+import { API_URL } from '../config';
 
 function ProjectDetail() {
   const [project, setProject] = useState(null);
@@ -19,7 +20,7 @@ function ProjectDetail() {
 
   const fetchProject = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/projects/${projectId}`);
+      const res = await axios.get(`${API_URL}/api/projects/${projectId}`);
       setProject(res.data);
     } catch (err) {
       setError('Project not found');
@@ -31,7 +32,7 @@ function ProjectDetail() {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/${projectId}`);
+        await axios.delete(`${API_URL}/api/projects/${projectId}`);
         navigate('/projects');
       } catch (err) {
         alert('Failed to delete project');
