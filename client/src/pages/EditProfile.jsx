@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 function EditProfile() {
   const { user, loadUser } = useContext(AuthContext);
@@ -49,7 +50,7 @@ function EditProfile() {
         .map(skill => skill.trim())
         .filter(skill => skill !== '');
 
-      await axios.put('http://localhost:5000/api/profile/update', {
+      await axios.put(`${API_URL}/api/profile/update`, {
         bio: formData.bio,
         skills: skillsArray,
         githubUsername: formData.githubUsername,
