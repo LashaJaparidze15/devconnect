@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 function GitHubRepos({ username }) {
   const [repos, setRepos] = useState([]);
@@ -13,7 +14,7 @@ function GitHubRepos({ username }) {
 
   const fetchRepos = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/auth/github/repos/${username}`);
+      const res = await axios.get(`${API_URL}/api/auth/github/repos/${username}`);
       setRepos(res.data.slice(0, 6));
     } catch (error) {
       console.error('Error fetching repos:', error);
