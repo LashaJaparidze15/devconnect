@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { initializeSocket, getSocket } from '../socket/socket';
 import axios from 'axios';
 import { getAvatarUrl } from '../utils/helpers';
+import { API_URL } from '../config';
 
 function Messages() {
   const [conversations, setConversations] = useState([]);
@@ -64,7 +65,7 @@ function Messages() {
 
   const fetchConversations = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/messages/conversations');
+      const res = await axios.get(`${API_URL}/api/messages/conversations`);
       setConversations(res.data);
     } catch (error) {
       console.error('Error fetching conversations:', error);
@@ -75,7 +76,7 @@ function Messages() {
 
   const selectUserById = async (userId) => {
     try {
-      const userRes = await axios.get(`http://localhost:5000/api/users/${userId}`);
+      const userRes = await axios.get(`${API_URL}/api/users/${userId}`);
       selectUser(userRes.data);
     } catch (error) {
       console.error('Error fetching user:', error);
@@ -86,7 +87,7 @@ function Messages() {
     setSelectedUser(user);
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/messages/${user._id}`);
+      const res = await axios.get(`${API_URL}/api/messages/${user._id}`);
       setMessages(res.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -100,7 +101,7 @@ function Messages() {
     if (!messageText.trim() || !selectedUser) return;
 
     try {
-      const res = await axios.post('http://localhost:5000/api/messages/send', {
+      const res = await axios.post(`${API_URL}/api/messages/send`, {
         recipientId: selectedUser._id,
         content: messageText
       });
