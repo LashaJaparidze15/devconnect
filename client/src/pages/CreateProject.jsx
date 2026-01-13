@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 function CreateProject() {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ function CreateProject() {
         .map(tech => tech.trim())
         .filter(tech => tech !== '');
 
-      await axios.post('http://localhost:5000/api/projects/create', {
+      await axios.post(`${API_URL}/api/projects/create`, {
         title: formData.title,
         description: formData.description,
         techStack: techStackArray,
