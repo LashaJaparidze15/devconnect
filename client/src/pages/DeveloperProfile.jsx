@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import GitHubRepos from './GitHubRepos';
 import { getAvatarUrl, getProjectImageUrl } from '../utils/helpers';
+import { API_URL } from '../config';
 
 function DeveloperProfile() {
   const [developer, setDeveloper] = useState(null);
@@ -22,8 +23,8 @@ function DeveloperProfile() {
   const fetchDeveloperData = async () => {
     try {
       const [devRes, projectsRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/users/${userId}`),
-        axios.get(`http://localhost:5000/api/projects/user/${userId}`)
+        axios.get(`${API_URL}/api/users/${userId}`),
+        axios.get(`${API_URL}/api/projects/user/${userId}`)
       ]);
       
       setDeveloper(devRes.data);
