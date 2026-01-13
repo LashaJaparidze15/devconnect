@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { getAvatarUrl, getProjectImageUrl } from '../utils/helpers';
+import { API_URL } from '../config';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -17,7 +18,7 @@ function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/projects');
+      const res = await axios.get(`${API_URL}/api/projects`);
       setProjects(res.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
