@@ -16,7 +16,10 @@ const io = new Server(server, {
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://devconnect.vercel.app'],
+  origin: [
+    'http://localhost:5173',
+    'devconnect-ashen.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
