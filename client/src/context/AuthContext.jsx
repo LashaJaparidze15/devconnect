@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
   const loadUser = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/me');
+      const res = await axios.get(`${API_URL}/api/auth/me`);
       setUser(res.data);
     } catch (error) {
       console.error('Error loading user:', error);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const res = await axios.post('http://localhost:5000/api/auth/login', {
+    const res = await axios.post(`${API_URL}/api/auth/login`, {
       email,
       password
     });
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (username, email, password) => {
-    const res = await axios.get(`${API_URL}/api/auth/me`);
+    const res = await axios.post(`${API_URL}/api/auth/register`, {
       username,
       email,
       password
