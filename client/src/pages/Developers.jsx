@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { getAvatarUrl } from '../utils/helpers';
+import { API_URL } from '../config';
 
 function Developers() {
   const [developers, setDevelopers] = useState([]);
@@ -19,7 +20,7 @@ function Developers() {
 
   const fetchDevelopers = async () => {
     try {
-      let url = 'http://localhost:5000/api/users';
+      let url = `${API_URL}/api/users`;
       const params = new URLSearchParams();
       
       if (filterLookingFor !== 'all') {
@@ -47,7 +48,7 @@ function Developers() {
     }
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/users?search=${searchTerm}`);
+      const res = await axios.get(`${API_URL}/api/users?search=${searchTerm}`);
       setDevelopers(res.data);
     } catch (error) {
       console.error('Error searching developers:', error);
